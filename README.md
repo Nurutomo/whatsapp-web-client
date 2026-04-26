@@ -50,7 +50,7 @@ The app will open in your browser at http://localhost:3000.
 ## Tech Stack
 
 ### Frontend
-- React 17
+- React 19
 - React Router DOM v5
 - Socket.IO Client
 

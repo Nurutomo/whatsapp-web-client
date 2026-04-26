@@ -1,8 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { MemoryRouter } from 'react-router-dom';
+import { SocketProvider } from './context/socketContext';
+import { UsersProvider } from './context/usersContext';
+import Home from './pages/Home';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders home page with end-to-end encrypted text', () => {
+    render(
+        <SocketProvider>
+            <UsersProvider>
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            </UsersProvider>
+        </SocketProvider>
+    );
+    const encryptedText = screen.getByText(/end-to-end encrypted/i);
+    expect(encryptedText).toBeInTheDocument();
 });

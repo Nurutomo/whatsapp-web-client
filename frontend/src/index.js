@@ -1,17 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { UsersProvider } from "./context/usersContext";
 import { SocketProvider } from "./context/socketContext";
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
     <React.StrictMode>
         <SocketProvider>
             <UsersProvider>
                 <App />
             </UsersProvider>
         </SocketProvider>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 );
