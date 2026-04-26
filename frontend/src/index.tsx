@@ -5,7 +5,10 @@ import App from "./App";
 import { UsersProvider } from "./context/usersContext";
 import { SocketProvider } from "./context/socketContext";
 
-const root = createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Root element not found");
+
+const root = createRoot(rootElement);
 root.render(
     <React.StrictMode>
         <SocketProvider>

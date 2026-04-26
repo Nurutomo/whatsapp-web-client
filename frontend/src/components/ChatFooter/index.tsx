@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./ChatFooter.css";
 
-function ChatFooter({ onSendMessage }) {
-    const [message, setMessage] = useState("");
+interface ChatFooterProps {
+    onSendMessage: (message: string) => void;
+}
 
-    const handleSubmit = (e) => {
+function ChatFooter({ onSendMessage }: ChatFooterProps) {
+    const [message, setMessage] = useState<string>("");
+
+    const handleSubmit = (e: React.SyntheticEvent): void => {
         e.preventDefault();
         if (message.trim()) {
             onSendMessage(message.trim());
@@ -12,10 +16,13 @@ function ChatFooter({ onSendMessage }) {
         }
     };
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            handleSubmit(e);
+            if (message.trim()) {
+                onSendMessage(message.trim());
+                setMessage("");
+            }
         }
     };
 

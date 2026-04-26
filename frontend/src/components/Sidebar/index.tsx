@@ -8,13 +8,13 @@ import SidebarHeader from "../SidebarHeader";
 function Sidebar() {
     const { users } = useUsersContext();
     const history = useHistory();
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState<string>("");
 
     const filteredUsers = users.filter((user) =>
         user.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const handleContactClick = (userId) => {
+    const handleContactClick = (userId: number): void => {
         history.push(`/chat/${userId}`);
     };
 

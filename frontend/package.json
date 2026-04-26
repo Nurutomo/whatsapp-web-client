@@ -40,11 +40,12 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
     "@whiskeysockets/baileys": "^7.0.0-rc.9",
-    "typescript": "^6.0.3"
+    "typescript": "^5.9.3"
   }
 }

@@ -1,16 +1,23 @@
 import React from "react";
 import "./ContactItem.css";
 import { useRouteMatch } from "react-router-dom";
+import { User, Message } from "../../types";
 
-function ContactItem({ user, onClick }) {
+interface ContactItemProps {
+    user: User;
+    onClick: () => void;
+}
+
+function ContactItem({ user, onClick }: ContactItemProps) {
     const match = useRouteMatch(`/chat/${user.id}`);
     const isActive = !!match;
+    const isTyping = user.presence === "composing";
 
-    const getLastMessage = () => {
+    const getLastMessage = (): Message | undefined => {
         const messageGroups = Object.values(user.messages);
+        if (messageGroups.length === 0) return undefined;
         const lastGroup = messageGroups[messageGroups.length - 1];
-        const lastMsg = lastGroup[lastGroup.length - 1];
-        return lastMsg;
+        return lastGroup[lastGroup.length - 1];
     };
 
     const lastMessage = getLastMessage();
@@ -21,8 +28,8 @@ function ContactItem({ user, onClick }) {
             onClick={onClick}
         >
             <div className="contact-item__avatar">
-                {user.profile_picture ? (
-                    <img src={user.profile_picture} alt={user.name} />
+                {user.imgUrl ? (
+                    <img src={user.imgUrl} alt={user.name} />
                 ) : (
                     <svg viewBox="0 0 212 212" width="49" height="49">
                         <path fill="#DFE5E7" d="M106.251.5C164.653.5 212 47.846 212 106.25S164.653 212 106.25 212C47.846 212 .5 164.654.5 106.25S47.846.5 106.251.5z"/>
@@ -39,7 +46,7 @@ function ContactItem({ user, onClick }) {
                 </div>
                 <div className="contact-item__bottom">
                     <div className="contact-item__message">
-                        {user.typing ? (
+                        {isTyping ? (
                             <span className="contact-item__typing">typing...</span>
                         ) : lastMessage ? (
                             <>

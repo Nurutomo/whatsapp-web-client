@@ -1,7 +1,11 @@
 import React from "react";
 import "./Loader.css";
 
-function Loader({ done }) {
+interface LoaderProps {
+    done: boolean;
+}
+
+function Loader({ done }: LoaderProps) {
     return (
         <div className="loader">
             <div className="loader__content">

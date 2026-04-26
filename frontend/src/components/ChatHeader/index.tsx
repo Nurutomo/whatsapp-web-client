@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import "./ChatHeader.css";
+import { User } from "../../types";
 
-function ChatHeader({ user }) {
-    const [showMenu, setShowMenu] = useState(false);
+interface ChatHeaderProps {
+    user: User;
+}
+
+function ChatHeader({ user }: ChatHeaderProps) {
+    const [showMenu, setShowMenu] = useState<boolean>(false);
+    const isTyping = user.presence === "composing";
 
     return (
         <div className="chat-header">
@@ -16,7 +22,7 @@ function ChatHeader({ user }) {
                 <div className="chat-header__info">
                     <p className="chat-header__name">{user.name}</p>
                     <p className="chat-header__status">
-                        {user.typing ? "typing..." : "click here for contact info"}
+                        {isTyping ? "typing..." : "click here for contact info"}
                     </p>
                 </div>
             </div>

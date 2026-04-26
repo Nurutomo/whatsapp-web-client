@@ -1,4 +1,33 @@
-const sentences = [
+import express from "express";
+import cors from "cors";
+import { Server, Socket } from "socket.io";
+
+const PORT = process.env.PORT || 5000;
+const app = express();
+
+app.use(cors());
+
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
+
+interface ServerToClientEvents {
+    start_typing: (data: { userId: number }) => void;
+    stop_typing: (data: { userId: number }) => void;
+    fetch_response: (data: { response: string; userId: number }) => void;
+}
+
+interface ClientToServerEvents {
+    fetch_response: (data: { userId: number }) => void;
+}
+
+const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
+    cors: { origin: "*" },
+});
+
+app.get("/", (req, res) => {
+    res.send("WhatsApp Web Clone Backend - Service is up and running...");
+});
+
+const sentences: string[] = [
     "Ooooh. That seems interesting. Tell me more!",
     "Joyce enjoyed eating pancakes with ketchup.",
     "At that moment he wasn't listening to music, he was living an experience.",
@@ -32,9 +61,36 @@ const sentences = [
     "Her scream silenced the rowdy teenagers.",
 ];
 
-const getRandomSentence = () => {
+const getRandomSentence = (): string => {
     const randomIndex = Math.floor(Math.random() * sentences.length);
     return sentences[randomIndex];
 };
 
-export default getRandomSentence;
+const getResponseInterval = (min: number, max: number): number => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
+    console.log("Client connected:", socket.id);
+
+    socket.on("fetch_response", (data: { userId: number }) => {
+        const { userId } = data;
+        const responseInterval = getResponseInterval(1000, 4000);
+
+        setTimeout(() => {
+            socket.emit("start_typing", { userId });
+
+            setTimeout(() => {
+                socket.emit("stop_typing", { userId });
+                socket.emit("fetch_response", {
+                    response: getRandomSentence(),
+                    userId,
+                });
+            }, responseInterval);
+        }, 1500);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("Client disconnected:", socket.id);
+    });
+});

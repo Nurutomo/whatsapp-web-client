@@ -7,9 +7,9 @@ import ChatBody from "../../components/ChatBody";
 import ChatFooter from "../../components/ChatFooter";
 
 function Chat() {
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const { users, setUserAsUnread, addNewMessage } = useUsersContext();
-    const user = users.find((u) => u.id === parseInt(id));
+    const user = users.find((u) => u.id === parseInt(id, 10));
 
     useEffect(() => {
         if (user) {
@@ -24,7 +24,7 @@ function Chat() {
         <div className="chat">
             <ChatHeader user={user} />
             <ChatBody user={user} />
-            <ChatFooter user={user} onSendMessage={(msg) => addNewMessage(user.id, msg)} />
+            <ChatFooter onSendMessage={(msg) => addNewMessage(user.id, msg)} />
         </div>
     );
 }

@@ -36,14 +36,14 @@ const UsersProvider = ({ children }: UsersProviderProps) => {
         });
     };
 
+    // Map socket 'start_typing' → Baileys WAPresence 'composing'
     const setUserAsTyping = (data: { userId: number }): void => {
-        const { userId } = data;
-        _updateUserProp(userId, "typing", true);
+        _updateUserProp(data.userId, "presence", "composing");
     };
 
+    // Map socket 'stop_typing' → Baileys WAPresence 'available'
     const setUserAsNotTyping = (data: { userId: number }): void => {
-        const { userId } = data;
-        _updateUserProp(userId, "typing", false);
+        _updateUserProp(data.userId, "presence", "available");
     };
 
     const fetchMessageResponse = (data: { userId: number; response: string }): void => {

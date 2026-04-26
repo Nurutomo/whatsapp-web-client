@@ -4,10 +4,10 @@ import { User } from "../types";
 const users: User[] = [
     {
         id: 1,
-        profile_picture: null,
+        imgUrl: null,
         name: "Love of my life ❤️",
-        phone_number: "+2348123456789",
-        whatsapp_name: "Beyonce",
+        phoneNumber: "+2348123456789",
+        notify: "Beyonce",
         unread: 3,
         messages: {
             "04/06/2021": [
@@ -32,14 +32,14 @@ const users: User[] = [
         },
         group: false,
         pinned: true,
-        typing: false,
+        presence: "available",
     },
     {
         id: 2,
-        profile_picture: null,
+        imgUrl: null,
         name: "Karen Okonkwo",
-        phone_number: "+2348123456789",
-        whatsapp_name: "Karen O.",
+        phoneNumber: "+2348123456789",
+        notify: "Karen O.",
         unread: 0,
         messages: {
             "04/06/2021": [
@@ -58,14 +58,14 @@ const users: User[] = [
         },
         group: false,
         pinned: false,
-        typing: false,
+        presence: "available",
     },
     {
         id: 3,
-        profile_picture: null,
+        imgUrl: null,
         name: "Titilayo Bello",
-        phone_number: "+2348123456789",
-        whatsapp_name: "titi123",
+        phoneNumber: "+2348123456789",
+        notify: "titi123",
         unread: 0,
         messages: {
             "04/06/2021": [
@@ -83,14 +83,14 @@ const users: User[] = [
         },
         group: false,
         pinned: false,
-        typing: false,
+        presence: "available",
     },
     {
         id: 4,
-        profile_picture: null,
+        imgUrl: null,
         name: "Adebisi Oluwatoyin",
-        phone_number: "+2348123456789",
-        whatsapp_name: "Bisi_joy",
+        phoneNumber: "+2348123456789",
+        notify: "Bisi_joy",
         unread: 1,
         messages: {
             TODAY: [
@@ -101,14 +101,14 @@ const users: User[] = [
         },
         group: false,
         pinned: false,
-        typing: false,
+        presence: "available",
     },
     {
         id: 5,
-        profile_picture: null,
+        imgUrl: null,
         name: "Tech Talk 💻",
-        phone_number: null,
-        whatsapp_name: null,
+        phoneNumber: undefined,
+        notify: undefined,
         unread: 5,
         messages: {
             TODAY: [
@@ -121,14 +121,14 @@ const users: User[] = [
         },
         group: true,
         pinned: true,
-        typing: false,
+        presence: "available",
     },
     {
         id: 6,
-        profile_picture: null,
+        imgUrl: null,
         name: "Emeka Nwosu",
-        phone_number: "+2348123456789",
-        whatsapp_name: "Emeka",
+        phoneNumber: "+2348123456789",
+        notify: "Emeka",
         unread: 0,
         messages: {
             YESTERDAY: [
@@ -141,7 +141,7 @@ const users: User[] = [
         },
         group: false,
         pinned: false,
-        typing: false,
+        presence: "available",
     },
 ];
 

@@ -1,10 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import "./ChatBody.css";
+import { User, Message } from "../../types";
 
-function ChatBody({ user }) {
-    const messagesEndRef = useRef(null);
+interface ChatBodyProps {
+    user: User;
+}
 
-    const scrollToBottom = () => {
+function ChatBody({ user }: ChatBodyProps) {
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = (): void => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
@@ -22,7 +27,7 @@ function ChatBody({ user }) {
                         <div className="chat-body__date-badge">
                             <span>{date}</span>
                         </div>
-                        {messages.map((message, index) => (
+                        {messages.map((message: Message, index: number) => (
                             <div
                                 key={index}
                                 className={`message ${

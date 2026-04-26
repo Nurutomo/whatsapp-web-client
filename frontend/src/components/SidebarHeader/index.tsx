@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SidebarHeader.css";
 
 function SidebarHeader() {
-    const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState<boolean>(false);
 
     return (
         <div className="sidebar-header">

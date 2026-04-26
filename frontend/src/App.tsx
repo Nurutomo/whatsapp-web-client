@@ -6,20 +6,20 @@ import Home from "./pages/Home";
 import Sidebar from "./components/Sidebar";
 import Chat from "./pages/Chat";
 
-const userPrefersDark =
-    window.matchMedia &&
+const userPrefersDark: boolean =
+    window.matchMedia != null &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 function App() {
-    const [appLoaded, setAppLoaded] = useState(false);
-    const [startLoadProgress, setStartLoadProgress] = useState(false);
+    const [appLoaded, setAppLoaded] = useState<boolean>(false);
+    const [startLoadProgress, setStartLoadProgress] = useState<boolean>(false);
 
     useEffect(() => {
         if (userPrefersDark) document.body.classList.add("dark-theme");
         stopLoad();
     }, []);
 
-    const stopLoad = () => {
+    const stopLoad = (): void => {
         setStartLoadProgress(true);
         setTimeout(() => setAppLoaded(true), 3000);
     };
