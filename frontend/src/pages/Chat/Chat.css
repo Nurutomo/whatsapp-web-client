@@ -1,0 +1,8 @@
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #efeae2;
+    position: relative;
+    overflow: hidden;
+}
